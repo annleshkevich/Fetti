@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FettiBot", "FettiBot\FettiBot.csproj", "{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Api", "1 Api", "{2F3274F0-B256-4CBF-8B8A-D1ED88F8DBD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Business Logic", "2 Business Logic", "{7B33E269-EC67-4640-94DD-AE7AEFD154FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Common", "4 Common", "{2E4C46B6-6A7B-4B29-A785-C61520526FFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Model", "3 Model", "{318C2CD5-26BC-4706-8DAC-9FB37C56F086}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FettiBot.Model", "FettiBot.Model\FettiBot.Model.csproj", "{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FettiBot.Common", "FettiBot.Common\FettiBot.Common.csproj", "{19D1A0BD-1790-4A78-BBF7-40B6FF621816}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FettiBot.BusinessLogic", "FettiBot.BusinessLogic\FettiBot.BusinessLogic.csproj", "{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D1A0BD-1790-4A78-BBF7-40B6FF621816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D1A0BD-1790-4A78-BBF7-40B6FF621816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D1A0BD-1790-4A78-BBF7-40B6FF621816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D1A0BD-1790-4A78-BBF7-40B6FF621816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9307D9B4-BA5A-4DA6-AD20-BDA0945A70A4} = {2F3274F0-B256-4CBF-8B8A-D1ED88F8DBD7}
+		{1B5C4A3E-E662-4B88-A2A7-D530BEAC451D} = {318C2CD5-26BC-4706-8DAC-9FB37C56F086}
+		{19D1A0BD-1790-4A78-BBF7-40B6FF621816} = {2E4C46B6-6A7B-4B29-A785-C61520526FFE}
+		{0CAA6B2E-3358-45FB-9CB8-01C9828A0C51} = {7B33E269-EC67-4640-94DD-AE7AEFD154FF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2540A69-F788-4C13-93EA-3FDFDC5F131E}
+	EndGlobalSection
+EndGlobal
