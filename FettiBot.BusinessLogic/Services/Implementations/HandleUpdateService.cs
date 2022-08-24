@@ -22,7 +22,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
         public static Client client;
         public static List<Client> clients = new();
 
-        static readonly string SpreadsheetsId = "1ojuD4jy_9jafKV7PYrehxat0IJ456dYDULiWK14TEBI";
+        static readonly string SpreadsheetsId = "";
         static readonly string sheet1 = "Clients";
         static readonly string sheet2 = "Settings";
         static SheetsService service;
