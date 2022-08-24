@@ -22,7 +22,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
         public static Client client;
         public static List<Client> clients = new();
 
-        static readonly string SpreadsheetsId = "";
+        static readonly string SpreadsheetsId = "1ojuD4jy_9jafKV7PYrehxat0IJ456dYDULiWK14TEBI";
         static readonly string sheet1 = "Clients";
         static readonly string sheet2 = "Settings";
         static SheetsService service;
@@ -140,7 +140,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                 if (clients[i].Num == message.From.Id)
                 {
                     // 1 move on to language
-                    if ((message.Text == "Back" || message.Text == "Назад")
+                    if ((message.Text == "/back" || message.Text == "/назад")
                         && (clients[i].LastMessage == "ENG" || clients[i].LastMessage == "RU"))
                     {
                         message.Text = "start";
@@ -156,7 +156,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         if (clients[i].Language == "ENG")
                         {
                             clients[i].LastMessage = clients[i].Language;
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "Back" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "/back" })
                             {
                                 ResizeKeyboard = true
                             };
@@ -166,7 +166,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         if (clients[i].Language == "RU")
                         {
                             clients[i].LastMessage = clients[i].Language;
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "Назад" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "/назад" })
                             {
                                 ResizeKeyboard = true
                             };
@@ -181,8 +181,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         && clients[i].CurrentL == true
                         && clients[i].Moving == false
                         && clients[i].LastMessage == clients[i].Email
-                        && (message.Text == "Back"
-                        || message.Text == "Назад"))
+                        && (message.Text == "/back"
+                        || message.Text == "/назад"))
                     {
                         message.Text = clients[i].Language;
                         clients[i].Language = null;
@@ -228,7 +228,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Ukraine", "Russia" },
                                 new KeyboardButton[] { "Lithuania", "Latvia" },
                                 new KeyboardButton[] { "Germany", "Great Britain" },
-                                new KeyboardButton[] { "Current Location", "Back" }
+                                new KeyboardButton[] { "Current Location", "/back" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -248,7 +248,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Литва", "Латвия" },
                                 new KeyboardButton[] { "Германия", "Великобритания" },
                                 new KeyboardButton[] { "Франция", "Испания" },
-                                new KeyboardButton[] { "Текущее местоположение", "Назад" }
+                                new KeyboardButton[] { "Текущее местоположение", "/назад" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -261,8 +261,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     if (clients[i].NextD == true
                         && clients[i].CurrentL == false
                         && clients[i].Moving == false
-                        && (message.Text == "Back"
-                        || message.Text == "Назад"))
+                        && (message.Text == "/back"
+                        || message.Text == "/назад"))
                     {
                         clients[i].CurrentLocation = null;
                         message.Text = clients[i].Email;
@@ -314,7 +314,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Greece", "Poland" },
                                 new KeyboardButton[] { "USA", "Brazil" },
                                 new KeyboardButton[] { "Georgia", "China" },
-                                new KeyboardButton[] { "Write other", "Back" }
+                                new KeyboardButton[] { "Write other", "/back" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -337,7 +337,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Греция", "Польша" },
                                 new KeyboardButton[] { "США", "Бразилия" },
                                 new KeyboardButton[] { "Грузия", "Китай" },
-                                new KeyboardButton[] { "Написать другое", "Назад" }})
+                                new KeyboardButton[] { "Написать другое", "/назад" }})
                             {
                                 ResizeKeyboard = true
                             };
@@ -360,8 +360,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         && clients[i].LastMessage != "interests"
                         && clients[i].LastMessage != "apps"
                         && clients[i].LastMessage != "access"
-                        && (message.Text == "Back"
-                        || message.Text == "Назад"))
+                        && (message.Text == "/back"
+                        || message.Text == "/назад"))
                     {
                         clients[i].CurrentL = true;
                         message.Text = clients[i].NextDestination;
@@ -414,7 +414,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 {
                                     new KeyboardButton[] { "Job offer", "Tourism" },
                                     new KeyboardButton[] { "Investing", "Relocation" },
-                                    new KeyboardButton[] { "Back" }
+                                    new KeyboardButton[] { "/back" }
 
                                 })
                                 {
@@ -432,7 +432,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 {
                                     new KeyboardButton[] { "Предложение работы", "Туризм" },
                                     new KeyboardButton[] { "Инвестирование", "Переезд" },
-                                    new KeyboardButton[] { "Назад" }
+                                    new KeyboardButton[] { "/назад" }
                                 })
                                 {
                                     ResizeKeyboard = true
@@ -445,8 +445,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     //move on to reason
                     if (clients[i].Moving == true
                        && clients[i].LastMessage == "reason"
-                       && (message.Text == "Back"
-                       || message.Text == "Назад")
+                       && (message.Text == "/back"
+                       || message.Text == "/назад")
                        )
                     {
                         clients[i].LastMessage = null;
@@ -472,7 +472,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                             ReplyKeyboardMarkup keyboard = new(new[]
                             {
                                 new KeyboardButton[] { "Yes", "No"},
-                                new KeyboardButton[] {  "Alone", "Back" }})
+                                new KeyboardButton[] {  "Alone", "/back" }})
                             {
                                 ResizeKeyboard = true
                             };
@@ -486,7 +486,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                             ReplyKeyboardMarkup keyboard = new(new[]
                             {
                                 new KeyboardButton[] { "Да", "Нет" },
-                                new KeyboardButton[] { "Одинок", "Назад" }
+                                new KeyboardButton[] { "Одинок", "/назад" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -497,8 +497,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
                     //6 move on to childs
                     if (clients[i].LastMessage == "childs"
-                       && (message.Text == "Back"
-                       || message.Text == "Назад")
+                       && (message.Text == "/back"
+                       || message.Text == "/назад")
                        )
                     {
                         message.Text = clients[i].ReasonForMoving;
@@ -525,7 +525,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Weather", "Love (partner/ family reunion)" },
                                 new KeyboardButton[] { "Meetings", "Entertainment" },
                                 new KeyboardButton[] { "Hospitality", "Extreme Sport" },
-                                new KeyboardButton[] { "Finish choosing interests", "Back" }
+                                new KeyboardButton[] { "Finish choosing interests", "/back" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -544,7 +544,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Погода", "Любовь (партнер/воссоединение семьи)" },
                                 new KeyboardButton[] { "Встречи", "Развлечения" },
                                 new KeyboardButton[] { "Гостеприимство", "Экстремальный спорт" },
-                                new KeyboardButton[] { "Закончить выбор интересов", "Назад" }
+                                new KeyboardButton[] { "Закончить выбор интересов", "/назад" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -555,8 +555,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
                     //7 move on to interests
                     if (clients[i].LastMessage == "interests"
-                       && (message.Text == "Back"
-                       || message.Text == "Назад")
+                       && (message.Text == "/back"
+                       || message.Text == "/назад")
                        )
                     {
                         clients[i].LastMessage = "childs";
@@ -627,7 +627,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Recommendations (Yelp)", "Events (Event Calendar etc)" },
                                 new KeyboardButton[] { "Chats (Whats app, etc)", "Forums (facebook etc)" },
                                 new KeyboardButton[] { "Local News (the Guardian etc)", "Weather (accuro etc)" },
-                                new KeyboardButton[] { "Finish selecting applications", "Back" }
+                                new KeyboardButton[] { "Finish selecting applications", "/back" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -654,7 +654,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 new KeyboardButton[] { "Рекомендации (Yelp)", "События (Event Calendar и т.д)" },
                                 new KeyboardButton[] { "Чаты (Whats app, и т.д)", "Форумы (facebook и т.д)" },
                                 new KeyboardButton[] { "Местные новости (the Guardian и т.д)", "Погода (accuro и т.д)" },
-                                new KeyboardButton[] { "Закончить выбор приложений", "Назад" }
+                                new KeyboardButton[] { "Закончить выбор приложений", "/назад" }
                             })
                             {
                                 ResizeKeyboard = true
@@ -669,8 +669,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
                     //8 move on to apps
                     if (clients[i].LastMessage == "apps"
-                        && (message.Text == "back"
-                       || message.Text == "назад"))
+                        && (message.Text == "/back"
+                       || message.Text == "/назад"))
                     {
                         clients[i].LastMessage = "interests";
                         message.Text = "Finish int";
@@ -717,7 +717,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                             }
 
                             clients[i].LastMessage = "apps";
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "yes", "no", "back" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "yes", "no", "/back" })
                             { ResizeKeyboard = true };
                             await botClient.SendTextMessageAsync(message.Chat.Id, "Do you want to simplify access to useful information? " +
                                 "\nThen sign up for FETTI an early access", replyMarkup: keyboard);
@@ -731,7 +731,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 return;
                             }
                             clients[i].LastMessage = "apps";
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "да", "нет", "назад" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "да", "нет", "/назад" })
                             { ResizeKeyboard = true };
                             await botClient.SendTextMessageAsync(message.Chat.Id, "Хотите упростить доступ к полезной информации? " +
                                 "\nТогда подпишитесь на FETTI с ранним доступом", replyMarkup: keyboard);
@@ -740,8 +740,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
                     //9 move on to access
                     if (clients[i].LastMessage == "access"
-                        && (message.Text == "back"
-                       || message.Text == "назад"))
+                        && (message.Text == "/back"
+                       || message.Text == "/назад"))
                     {
 
                         clients[i].Save = true;
@@ -759,7 +759,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         clients[i].Access = message.Text;
                         if (clients[i].Language == "ENG")
                         {
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "end", "back" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "end", "/back" })
                             {
                                 ResizeKeyboard = true
                             };
@@ -771,7 +771,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         }
                         if (clients[i].Language == "RU")
                         {
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "закончить", "назад" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "закончить", "/назад" })
                             {
                                 ResizeKeyboard = true
                             };

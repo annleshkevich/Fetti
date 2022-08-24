@@ -51,7 +51,7 @@ namespace FeedbackBot
                .Build();
             HandleUpdateService handleService = ActivatorUtilities.CreateInstance<HandleUpdateService>(host.Services);
 
-            client = new("");
+            client = new("5682359235:AAGnSE6EdzC1_2l7BKNMtqohEGzHgUC0Woc");
             Console.WriteLine("bot is running...");
 
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
