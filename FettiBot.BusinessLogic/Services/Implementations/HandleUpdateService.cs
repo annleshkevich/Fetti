@@ -22,17 +22,18 @@ namespace FettiBot.BusinessLogic.Services.Implementations
         public static Client client;
         public static List<Client> clients = new();
 
-        static readonly string SpreadsheetsId = "1ojuD4jy_9jafKV7PYrehxat0IJ456dYDULiWK14TEBI";
-        static readonly string sheet = "Clients";
+        static readonly string SpreadsheetsId = "";
+        static readonly string sheet1 = "Clients";
+        static readonly string sheet2 = "Settings";
         static SheetsService service;
-        
+
         static void CreateHeader()
         {
-            var range = $"{sheet}!A:K";
+            var range = $"{sheet1}!A:K";
             var valueRange = new ValueRange();
 
             var objectList = new List<object>() { "Id", "Name", "Language", "Email", "Current location",
-                "Next destination", "Reason for relocation", "Traveling with kids", "Interests", 
+                "Next destination", "Reason for relocation", "Traveling with kids", "Interests",
                 "Apps", "Access"};
             valueRange.Values = new List<IList<object>> { objectList };
 
@@ -40,6 +41,26 @@ namespace FettiBot.BusinessLogic.Services.Implementations
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource
                 .AppendRequest.ValueInputOptionEnum.USERENTERED;
             var appendResponse = appendRequest.Execute();
+        }
+        // // / / /// /// //////////////////////////////////////
+        static void ReadEntries()
+        {
+            var range = $"{sheet1}!A1:F10";
+            var request = service.Spreadsheets.Values.Get(SpreadsheetsId, range);
+
+            var response = request.Execute();
+            var values = response.Values;
+            if (values != null && values.Count > 0)
+            {
+                foreach (var row in values)
+                {
+                    Console.WriteLine($"{row[5]} {row[4]} | {row[3]} | {row[1]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No data found.");
+            }
         }
         public async Task EchoAsync(Update update, ITelegramBotClient client, ApplicationContext context)
         {
@@ -60,21 +81,22 @@ namespace FettiBot.BusinessLogic.Services.Implementations
         }
         public static bool IsValidEmail(string email)
         {
-            Regex emailRegex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
+          
+            Regex emailRegex = new(@"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$", RegexOptions.IgnoreCase);
             return emailRegex.IsMatch(email);
         }
         public static async Task HandleMessage(ITelegramBotClient botClient, Message message)
         {
-        //    if(message.Text == "/link")
-        //    {
-        //        var prs = new ProcessStartInfo("chrome.exe");
-        //        prs.Arguments = "https://fetti.world";
-        //        Process.Start(prs);
-        //    }
-            if (message.Text == "/start" )
+            //    if(message.Text == "/link")
+            //    {
+            //        var prs = new ProcessStartInfo("chrome.exe");
+            //        prs.Arguments = "https://fetti.world";
+            //        Process.Start(prs);
+            //    }
+            if (message.Text == "/start")
             {
                 client = new Client { Num = message.From.Id, Name = message.From.FirstName };
-               
+
                 for (int i = 0; i < clients.Count; i++)
                 {
                     if (clients[i].Num == client.Num)
@@ -118,7 +140,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                 if (clients[i].Num == message.From.Id)
                 {
                     // 1 move on to language
-                    if ((message.Text == "Back" || message.Text == "Назад") 
+                    if ((message.Text == "Back" || message.Text == "Назад")
                         && (clients[i].LastMessage == "ENG" || clients[i].LastMessage == "RU"))
                     {
                         message.Text = "start";
@@ -128,7 +150,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         return;
                     }
                     //language
-                    if (message.Text == "RU" || message.Text == "ENG"  )
+                    if (message.Text == "RU" || message.Text == "ENG")
                     {
                         clients[i].Language = message.Text;
                         if (clients[i].Language == "ENG")
@@ -159,8 +181,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         && clients[i].CurrentL == true
                         && clients[i].Moving == false
                         && clients[i].LastMessage == clients[i].Email
-                        && (message.Text == "Back" 
-                        || message.Text == "Назад") )
+                        && (message.Text == "Back"
+                        || message.Text == "Назад"))
                     {
                         message.Text = clients[i].Language;
                         clients[i].Language = null;
@@ -184,7 +206,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         }
                         if (IsValidEmail(message.Text) == false)
                         {
-                            if(clients[i].Language == "ENG")
+                            if (clients[i].Language == "ENG")
                             {
                                 await botClient.SendTextMessageAsync(message.Chat.Id, "Email was not entered correctly");
                                 return;
@@ -330,7 +352,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                             }
                         }
                     }
-                    
+
                     // 4 move on to next destination
                     if (clients[i].Moving == true
                         && clients[i].LastMessage != "childs"
@@ -448,7 +470,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                             clients[i].LastMessage = "reason";
                             clients[i].ReasonForMoving = message.Text;
                             ReplyKeyboardMarkup keyboard = new(new[]
-                            { 
+                            {
                                 new KeyboardButton[] { "Yes", "No"},
                                 new KeyboardButton[] {  "Alone", "Back" }})
                             {
@@ -561,7 +583,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     {
                         if (clients[i].AreInterestsFilledIn == false)
                         {
-                            
+
                             if (clients[i].IntCount == 0)
                             {
                                 clients[i].LastMessage = "interests";
@@ -574,7 +596,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                                 clients[i].AreInterestsFilledIn = true;
                                 return;
                             }
-                            if (clients[i].IntCount > 0&& clients[i].IntCount <=3)
+                            if (clients[i].IntCount > 0 && clients[i].IntCount <= 3)
                             {
                                 clients[i].LastMessage = "interests";
                                 clients[i].Interests += $", {message.Text}";
@@ -584,8 +606,8 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         }
                     }
                     if (message.Text == "Finish int"
-                        ||clients[i].AreInterestsFilledIn == true 
-                        || message.Text == "Finish choosing interests" 
+                        || clients[i].AreInterestsFilledIn == true
+                        || message.Text == "Finish choosing interests"
                         || message.Text == "Закончить выбор интересов")
                     {
                         clients[i].AreInterestsFilledIn = false;
@@ -731,13 +753,13 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
                     //access
 
-                    if (message.Text == "yes" || message.Text == "no" 
+                    if (message.Text == "yes" || message.Text == "no"
                         || message.Text == "да" || message.Text == "нет")
                     {
                         clients[i].Access = message.Text;
                         if (clients[i].Language == "ENG")
                         {
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "continue", "back" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "end", "back" })
                             {
                                 ResizeKeyboard = true
                             };
@@ -749,7 +771,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         }
                         if (clients[i].Language == "RU")
                         {
-                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "продолжить", "назад" })
+                            ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "закончить", "назад" })
                             {
                                 ResizeKeyboard = true
                             };
@@ -763,13 +785,13 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                     }
 
                     if (clients[i].LastMessage == "access"
-                         && (message.Text == "continue"
-                         || message.Text == "продолжить"))
+                         && (message.Text == "end"
+                         || message.Text == "закончить"))
                     {
                         _context.Clients.Add(clients[i]);
                         _context.SaveChanges();
 
-                        var range = $"{sheet}!A:K";
+                        var range = $"{sheet1}!A:K";
                         var valueRange = new ValueRange();
 
                         var objectList = new List<object>()
@@ -795,7 +817,7 @@ namespace FettiBot.BusinessLogic.Services.Implementations
                         appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource
                             .AppendRequest.ValueInputOptionEnum.USERENTERED;
                         var appendResponse = appendRequest.Execute();
-                        ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "/start"})
+                        ReplyKeyboardMarkup keyboard = new(new KeyboardButton[] { "/start" })
                         {
                             ResizeKeyboard = true
                         };
